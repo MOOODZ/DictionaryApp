@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Dictionary</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="immigration">مهاجرت به آلمان</string>
+    <string name="education">تحصیل در آلمان</string>
+    <string name="teaching">آموزش زبان آلمانی</string>
+    <string name="dictionary">فرهنگ لغت</string>
+    <string name="title">Werther</string>
+    <string name="search">Suche heir</string>
+    <string name="wörterbuch">Wörterbuch</string>
+    <string name="home">صفحه اصلی</string>
+    <string name="translator">مترجم</string>
+    <string name="share">اشتراک گذاری</string>
+    <string name="open">open drawer!</string>
+    <string name="close">close drawer!</string>
+<!--    <string name="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</string>-->
+</resources>
