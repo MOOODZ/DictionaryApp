@@ -1,7 +1,6 @@
 package com.example.dictionary.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
 import com.example.dictionary.adapter.TextAdapter
-import com.example.dictionary.apiManager.ApiManager
 import com.example.dictionary.apiManager.ApiService
+import com.example.dictionary.apiManager.getRetrofitInstance
 import com.example.dictionary.apiManager.model.Text
+import com.example.dictionary.apiManager.networkModel.Words
 import com.example.dictionary.databinding.FragmentEducationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,11 +78,42 @@ class EducationFragment : Fragment() {
         adapter = TextAdapter(textList)
         myRecy.adapter = adapter*/
 
-        recyclerView = view.findViewById(R.id.recyclerMain)
+        /*recyclerView = view.findViewById(R.id.recyclerMain)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         adapter = TextAdapter(textList)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter*/
+
+
+    }
+
+    private fun getData() {
+        val retrofitData = getRetrofitInstance().create(ApiService::class.java)
+            .getWords()
+        retrofitData.enqueue(object : Callback<Words> {
+            override fun onResponse(call: Call<Words?>, response: Response<Words?>) {
+                if (response.body()!!.list_art.isEmpty()) {
+                    recyclerView.visibility = View.GONE
+                } else {
+
+                    recyclerView = view!!.findViewById(R.id.recyclerMain)
+                    recyclerView.setHasFixedSize(true)
+                    recyclerView.layoutManager =
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    adapter = TextAdapter(textList)
+                    recyclerView.adapter = adapter
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<Words>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
 
 
     }
@@ -113,7 +144,6 @@ class EducationFragment : Fragment() {
 
 
     }*/
-
 
 
 }

@@ -7,6 +7,10 @@ import retrofit2.http.POST
 interface ApiService {
 
     @POST("getListarticle")
-    fun getWords() : Call<List<Art>>
+    fun getWords(
+
+
+
+    ): Call<List<Art>>
 
 }

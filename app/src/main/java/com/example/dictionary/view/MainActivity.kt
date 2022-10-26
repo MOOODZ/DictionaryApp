@@ -33,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
-
         val adapter = ViewPagerAdapter(this)
         binding.viewPagerMain.adapter = adapter
         //binding.vpMain.orientation = ViewPager2.ORIENTATION_VERTICAL
@@ -74,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initMenu(){
+    private fun initMenu() {
         val actionBarDrawerToggle = ActionBarDrawerToggle(
             this,
             binding.drawerLayoutMain,
@@ -106,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initTabs(){
+    private fun initTabs() {
 
         binding.tabLayoutMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -157,8 +154,10 @@ class MainActivity : AppCompatActivity() {
                 .show()
         } else {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            intent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "de")
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Sagen Sie etwas!")
             startActivityForResult(intent, REC)
@@ -167,7 +166,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showKeyboard(editText: EditText, context: Context) {
         binding.edTextMain.requestFocus()
-        val i : InputMethodManager =
+        val i: InputMethodManager =
             context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         i.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
 
