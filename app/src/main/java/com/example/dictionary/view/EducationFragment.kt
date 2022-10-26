@@ -11,7 +11,7 @@ import com.example.dictionary.R
 import com.example.dictionary.adapter.TextAdapter
 import com.example.dictionary.apiManager.ApiService
 import com.example.dictionary.apiManager.getRetrofitInstance
-import com.example.dictionary.apiManager.model.Text
+import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.apiManager.networkModel.Words
 import com.example.dictionary.databinding.FragmentEducationBinding
 import retrofit2.Call
@@ -22,7 +22,7 @@ import retrofit2.Response
 class EducationFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentEducationBinding
-    private lateinit var textList: ArrayList<Text>
+    private lateinit var textList: List<Art>
     private lateinit var adapter: TextAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +36,10 @@ class EducationFragment : Fragment() {
 
         binding = FragmentEducationBinding.inflate(layoutInflater)
 
-        textList = arrayListOf(
+        getData()
+
+
+        /*textList = arrayListOf(
 
             Text(
                 "تحصیل در آلمان",
@@ -67,7 +70,7 @@ class EducationFragment : Fragment() {
 
 
             )
-        )
+        )*/
 
 
         /* Another method to setup the RecyclerView
@@ -88,11 +91,14 @@ class EducationFragment : Fragment() {
     }
 
     private fun getData() {
+
         val retrofitData = getRetrofitInstance().create(ApiService::class.java)
             .getWords()
-        retrofitData.enqueue(object : Callback<Words> {
-            override fun onResponse(call: Call<Words?>, response: Response<Words?>) {
-                if (response.body()!!.list_art.isEmpty()) {
+
+        retrofitData.enqueue(object :Callback<List<Words>>{
+            override fun onResponse(call: Call<List<Words>>, response: Response<List<Words>>) {
+                if (response.body()!!.isEmpty()) {
+
                     recyclerView.visibility = View.GONE
                 } else {
 
@@ -104,20 +110,14 @@ class EducationFragment : Fragment() {
                     recyclerView.adapter = adapter
 
                 }
-
             }
 
-            override fun onFailure(call: Call<Words>, t: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<List<Words>>, t: Throwable) {
+                getData()
             }
 
         })
-
-
-
-
     }
-
 
     /*fun getListCopRecyclerDetail() {
         val ret=ApiManager.getRetrofitInstance().create(ApiService::class.java)

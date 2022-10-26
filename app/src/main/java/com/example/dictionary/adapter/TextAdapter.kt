@@ -4,18 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.apiManager.model.Text
+import com.example.dictionary.apiManager.networkModel.Art
+import com.example.dictionary.apiManager.networkModel.Words
 import com.example.dictionary.databinding.ItemListBinding
 
 
-class TextAdapter(private val data: ArrayList<Text>) :
+class TextAdapter(private val data: List<Art>) :
     RecyclerView.Adapter<TextAdapter.TextViewHolder>() {
     private lateinit var binding: ItemListBinding
     inner class TextViewHolder(binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(position: Int) {
-            binding.titleMain.text = data[position].title_1
-            binding.textMain.text = data[position].text_1
+            binding.titleMain.text = data[position].ID
+            binding.textMain.text = data[position].title
         }
 
     }
