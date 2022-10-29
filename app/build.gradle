@@ -68,7 +68,5 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    // sweet alert dialog
-    implementation "com.github.f0ris.sweetalert:library:1.5.1"
 
 }

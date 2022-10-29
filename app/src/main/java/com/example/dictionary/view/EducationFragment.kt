@@ -1,6 +1,7 @@
 package com.example.dictionary.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,10 +94,11 @@ class EducationFragment : Fragment() {
     private fun getData() {
 
         val retrofitData = getRetrofitInstance().create(ApiService::class.java)
-            .getWords()
+            .getWords("1")
 
-        retrofitData.enqueue(object :Callback<List<Words>>{
+        retrofitData.enqueue(object : Callback<List<Words>> {
             override fun onResponse(call: Call<List<Words>>, response: Response<List<Words>>) {
+                Log.i("havij",response.body().toString())
                 if (response.body()!!.isEmpty()) {
 
                     recyclerView.visibility = View.GONE
@@ -113,37 +115,11 @@ class EducationFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Words>>, t: Throwable) {
-                getData()
+               Log.i("havijFailure",t.message.toString())
             }
 
         })
     }
-
-    /*fun getListCopRecyclerDetail() {
-        val ret=ApiManager.getRetrofitInstance().create(ApiService::class.java)
-        val items=ret.getWords().enqueue()
-
-
-    }*/
-
-
-    /* fun getWords(){
-        val apiService = ApiManager().
-        apiService.getWords().enqueue( object : Callback<List<Art>> {
-            override fun onResponse(data: Call<List<Art>>, response: Response<List<Art>>) {
-                Log.v("RESPONSE_CHECK" , data.toString())
-            }
-
-            override fun onFailure(call: Call<List<Art>>, t: Throwable) {
-                Log.v("FAILURE_CHECK" , call.toString())
-
-            }
-
-
-        })
-
-
-    }*/
 
 
 }
