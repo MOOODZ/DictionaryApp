@@ -94,16 +94,38 @@ class EducationFragment : Fragment() {
     private fun getData() {
 
         val retrofitData = getRetrofitInstance().create(ApiService::class.java)
-            .getWords("1")
+            .getWords()
 
-        retrofitData.enqueue(object : Callback<List<Words>> {
-            override fun onResponse(call: Call<List<Words>>, response: Response<List<Words>>) {
-                Log.i("havij",response.body().toString())
-                if (response.body()!!.isEmpty()) {
+        retrofitData.enqueue(object : Callback<Words> {
+
+
+            //            override fun onResponse(call: Call<List<Words>>, response: Response<List<Words>>) {
+//                Log.i("havij",response.body().toString())
+//                if (response.body()!!.isEmpty()) {
+//
+//                    recyclerView.visibility = View.GONE
+//                } else {
+//                    textList = response.body().
+//                    recyclerView = view!!.findViewById(R.id.recyclerMain)
+//                    recyclerView.setHasFixedSize(true)
+//                    recyclerView.layoutManager =
+//                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//                    adapter = TextAdapter(textList)
+//                    recyclerView.adapter = adapter
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Words>>, t: Throwable) {
+//               Log.i("havijFailure",t.message.toString())
+//            }
+            override fun onResponse(call: Call<Words>, response: Response<Words>) {
+                Log.i("havij", response.body().toString())
+                if (response.body()!!.list_art.isEmpty()) {
 
                     recyclerView.visibility = View.GONE
                 } else {
-
+                    textList = response.body()!!.list_art
                     recyclerView = view!!.findViewById(R.id.recyclerMain)
                     recyclerView.setHasFixedSize(true)
                     recyclerView.layoutManager =
@@ -114,8 +136,8 @@ class EducationFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Words>>, t: Throwable) {
-               Log.i("havijFailure",t.message.toString())
+            override fun onFailure(call: Call<Words>, t: Throwable) {
+                TODO("Not yet implemented")
             }
 
         })

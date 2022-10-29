@@ -7,11 +7,15 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ApiService {
-    @FormUrlEncoded
+    //@FormUrlEncoded
     @POST("getListarticle")
     fun getWords(
-        @Field("ID")ID:String?
+        //@Field("ID")ID:String?
 
-    ): Call<List<Words>>
+    ): Call<Words>
+
+    @POST("detaile_article")
+    fun getArticle():
+
 
 }
