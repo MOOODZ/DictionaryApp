@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.tabLayoutMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab!!.position == 3) {
+                if (tab!!.position == 1) {
 
                     showKeyboard(binding.edTextMain, this@MainActivity)
                     collapseToolbar()
@@ -129,18 +129,10 @@ class MainActivity : AppCompatActivity() {
         ) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "فرهنگ لغت"
-                }
-                1 -> {
                     tab.text = "تحصیل در آلمان"
                 }
-                2 -> {
-                    tab.text = "مهاجرت به آلمان"
-                }
-                3 -> {
-                    tab.text = "آموزش زبان آلمانی"
-
-
+                1 -> {
+                    tab.text = "فرهنگ لغت"
                 }
             }
         }

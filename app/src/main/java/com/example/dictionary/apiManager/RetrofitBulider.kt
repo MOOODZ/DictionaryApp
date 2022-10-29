@@ -9,14 +9,14 @@ import java.util.concurrent.TimeUnit
 const val BASE_URL = "  https://yerbyer.com/dectionary/backend/api/v1/dic/"
 
 
-fun getRetrofitInstance (): Retrofit{
+fun getRetrofitInstance(): Retrofit {
 
     val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .readTimeout(60, TimeUnit.SECONDS)
         .connectTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    return  Retrofit.Builder()
+    return Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)

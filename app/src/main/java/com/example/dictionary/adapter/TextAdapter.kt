@@ -2,10 +2,10 @@ package com.example.dictionary.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dictionary.apiManager.model.Text
+import com.bumptech.glide.Glide
 import com.example.dictionary.apiManager.networkModel.Art
-import com.example.dictionary.apiManager.networkModel.Words
 import com.example.dictionary.databinding.ItemListBinding
 
 
@@ -18,6 +18,13 @@ class TextAdapter(private val data: List<Art>) :
         fun bindData(position: Int) {
             binding.titleMain.text = data[position].ID
             binding.textMain.text = data[position].title
+
+            Glide
+                .with(FragmentActivity(position))
+                .load(data[position].image)
+                //.into()
+
+
         }
 
     }

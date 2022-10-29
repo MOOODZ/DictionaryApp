@@ -17,7 +17,6 @@
         android:fitsSystemWindows="true">
 
 
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarMain"
             android:layout_width="match_parent"
@@ -48,22 +47,19 @@
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:drawableEnd="@drawable/ic_star"
                     android:layout_gravity="end"
                     android:background="@drawable/tab_color_background"
-                    />
+                    android:drawableEnd="@drawable/ic_star" />
 
                 <TextView
+                    style="@style/FontStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    style="@style/FontStyle"
                     android:text="@string/wörterbuch"
                     android:textColor="@color/gold"
-                    android:textSize="18sp"/>
-
-
+                    android:textSize="18sp" />
 
 
                 <androidx.appcompat.widget.Toolbar
@@ -71,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:theme="@style/myToolBar" />
+
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayoutMain"
                     android:layout_width="match_parent"
@@ -80,13 +77,13 @@
                     android:animationCache="true"
                     android:background="@drawable/tab_color_background"
                     app:tabGravity="fill"
-                    app:tabMode="scrollable"
-                    app:tabTextColor="#fff"
                     app:tabIndicatorColor="@color/cardview_light_background"
-                    app:tabSelectedTextColor="@color/cardview_light_background"
                     app:tabIndicatorHeight="0dp"
                     app:tabMaxWidth="0dp"
-                    app:tabTextAppearance="@style/TabPager" />
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/cardview_light_background"
+                    app:tabTextAppearance="@style/TabPager"
+                    app:tabTextColor="#fff" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -98,7 +95,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
 
 
         <EditText
@@ -117,7 +113,7 @@
             android:paddingEnd="24dp"
             android:paddingBottom="16dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/dark_white"/>
+            android:textColorHint="@color/dark_white" />
 
         <Button
             android:id="@+id/btnVoiceSearch"
@@ -129,13 +125,14 @@
             android:drawableEnd="@drawable/ic_mic"
             android:gravity="center" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <com.google.android.material.navigation.NavigationView
-        app:menu="@menu/menu_navigaiton_drawer"
         android:id="@+id/navigationViewMain"
-        app:headerLayout="@layout/header_main"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_main"
+        app:menu="@menu/menu_navigaiton_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>
 
 
