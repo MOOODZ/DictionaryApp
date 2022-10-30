@@ -27,12 +27,11 @@ class TextAdapter(private val context: Context , private val data: List<Art>) :
             binding.titleMain.text = data[position].ID
             binding.textMain.text = data[position].title
 
-            Glide
+            /*Glide
                 .with(context)
                 .load(data[position].image)
-                .into(binding.ivMain!!)
-
-            Log.i("IMAGE_CHECK" , data.toString())
+                .into(binding.ivMain)
+*/
 
 
 

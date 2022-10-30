@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
@@ -20,8 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
-            android:scaleType="centerCrop" />
+            android:scaleType="fitXY"
+            android:src="@drawable/germany_pic_two" />
 
 
         <TextView
@@ -29,6 +29,10 @@
             style="@style/FontStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:hint="@string/education"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -39,6 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:hint="@string/test_text"
             android:justificationMode="inter_word"
             android:lineSpacingExtra="5dp"
             android:textColor="@color/black"

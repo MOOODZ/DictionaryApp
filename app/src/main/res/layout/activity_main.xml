@@ -77,13 +77,13 @@
                     android:animationCache="true"
                     android:background="@drawable/tab_color_background"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/cardview_light_background"
-                    app:tabIndicatorHeight="0dp"
+                    app:tabIndicatorColor="@color/gold"
+                    app:tabIndicatorHeight="4dp"
                     app:tabMaxWidth="0dp"
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="@color/cardview_light_background"
                     app:tabTextAppearance="@style/TabPager"
-                    app:tabTextColor="#fff" />
+                    app:tabTextColor="@color/dark_white" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

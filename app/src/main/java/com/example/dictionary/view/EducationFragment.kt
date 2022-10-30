@@ -1,7 +1,6 @@
 package com.example.dictionary.view
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.example.dictionary.adapter.TextAdapter
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.databinding.FragmentEducationBinding
 import com.example.dictionary.viewmodel.MainViewModel
-import org.legobyte.khanedan.ui.dialogs.SuggestDialog
 import java.util.ArrayList
 
 
@@ -25,7 +23,8 @@ class EducationFragment : Fragment() {
     private lateinit var adapter: TextAdapter
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
-    private val suggestDialog = SuggestDialog(requireView().context)
+
+    //    private val suggestDialog = SuggestDialog(requireView().context)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -43,7 +42,7 @@ class EducationFragment : Fragment() {
 
         setupViewModel()
 
-        initDialog()
+//        initDialog()
 
 
     }
@@ -65,6 +64,7 @@ class EducationFragment : Fragment() {
         viewModel.getWordsList()
 
     }
+/*
     private fun initDialog(){
         suggestDialog.apply {
             setup(
@@ -83,6 +83,7 @@ class EducationFragment : Fragment() {
 
 
     }
+*/
 
 
     /* Using only Retrofit

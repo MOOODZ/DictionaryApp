@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
@@ -15,7 +16,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.addTextChangedListener
-import com.example.dictionary.R
+import androidx.viewpager.widget.PagerTabStrip
+import com.example.dictionary.R.*
 import com.example.dictionary.adapter.ViewPagerAdapter
 import com.example.dictionary.databinding.ActivityMainBinding
 import com.google.android.material.appbar.AppBarLayout
@@ -33,13 +35,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val adapter = ViewPagerAdapter(this)
-        binding.viewPagerMain.adapter = adapter
-        binding.viewPagerMain.offscreenPageLimit = 1
+        initViewPager()
 
         initMenu()
 
-        initTabs()
+        initTabLayout()
 
         binding.edTextMain.addTextChangedListener {
             textChanged?.invoke(binding.edTextMain.text.toString())
@@ -51,6 +51,17 @@ class MainActivity : AppCompatActivity() {
 
 
         //binding.vpMain.orientation = ViewPager2.ORIENTATION_VERTICAL
+
+    }
+
+    private fun initViewPager() {
+
+        //val pagerTabStrip = binding.viewPagerMain as PagerTabStrip
+        val adapter = ViewPagerAdapter(this)
+        binding.viewPagerMain.adapter = adapter
+        binding.viewPagerMain.offscreenPageLimit = 1
+        //pagerTabStrip.drawFullUnderline = true
+        //pagerTabStrip.tabIndicatorColor = Color.WHITE
 
     }
 
@@ -76,23 +87,23 @@ class MainActivity : AppCompatActivity() {
             this,
             binding.drawerLayoutMain,
             binding.toolbarMain,
-            R.string.open,
-            R.string.close
+            string.open,
+            string.close
         )
         binding.drawerLayoutMain.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
         binding.navigationViewMain.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> {
+                com.example.dictionary.R.id.home -> {
                     Toast.makeText(this, "You clicked on Home!", Toast.LENGTH_SHORT).show()
 
                 }
-                R.id.translate -> {
+                com.example.dictionary.R.id.translate -> {
                     Toast.makeText(this, "You clicked on translate!", Toast.LENGTH_SHORT).show()
 
                 }
-                R.id.share -> {
+                com.example.dictionary.R.id.share -> {
                     Toast.makeText(this, "You clicked on share!", Toast.LENGTH_SHORT).show()
 
                 }
@@ -103,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initTabs() {
+    private fun initTabLayout() {
 
         binding.tabLayoutMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
