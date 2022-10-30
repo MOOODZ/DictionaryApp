@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(this)
         binding.viewPagerMain.adapter = adapter
-        //binding.vpMain.orientation = ViewPager2.ORIENTATION_VERTICAL
         binding.viewPagerMain.offscreenPageLimit = 1
-
 
         initMenu()
 
@@ -51,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             speechInput()
         }
 
+
+        //binding.vpMain.orientation = ViewPager2.ORIENTATION_VERTICAL
 
     }
 

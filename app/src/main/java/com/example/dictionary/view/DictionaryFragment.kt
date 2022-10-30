@@ -75,8 +75,6 @@ class DictionaryFragment : Fragment() {
 
             )
 
-
-
         recyclerView = view.findViewById(R.id.recyclerEmpty)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         adapter = MonthsAdapter(monthsList.clone() as ArrayList<Months>)
@@ -84,6 +82,7 @@ class DictionaryFragment : Fragment() {
 
         (activity as MainActivity).textChanged = { text ->
             addText(text)
+
         }
 
     }

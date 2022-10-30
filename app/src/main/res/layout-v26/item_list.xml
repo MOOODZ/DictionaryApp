@@ -15,15 +15,6 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <ImageView
-            android:id="@+id/ivMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:scaleType="centerCrop" />
-
-
         <TextView
             android:id="@+id/titleMain"
             style="@style/FontStyle"

@@ -8,7 +8,5 @@ import retrofit2.http.POST
 
 interface ApiService {
     @POST("getListarticle")
-    fun getWords(): Call<Words>
-
-
+    suspend fun getWords(): Words
 }

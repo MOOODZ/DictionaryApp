@@ -13,5 +13,12 @@
     <string name="share">اشتراک گذاری</string>
     <string name="open">open drawer!</string>
     <string name="close">close drawer!</string>
+    <string name="title_dialog">Testing Dialog</string>
+    <string name="btn_send_dialog">Send</string>
+    <string name="edt_title_dialog">edit</string>
+    <string name="edt_desc_dialog">description</string>
+    <string name="edt_phone_dialog">phone</string>
+
+
 <!--    <string name="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</string>-->
 </resources>
