@@ -1,23 +1,18 @@
 package com.example.dictionary.adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
-import android.util.Log.w
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.databinding.ItemListBinding
-import java.util.ArrayList
 
 
-class TextAdapter(private val context: Context , private val data: List<Art>) :
-    RecyclerView.Adapter<TextAdapter.TextViewHolder>() {
+class ArtListAdapter(private val data: List<Art>) :
+    RecyclerView.Adapter<ArtListAdapter.TextViewHolder>() {
     private lateinit var binding: ItemListBinding
+
+    var onItemClick : ((String) -> Unit)? = null
+
 
     inner class TextViewHolder(binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -27,13 +22,20 @@ class TextAdapter(private val context: Context , private val data: List<Art>) :
             binding.titleMain.text = data[position].ID
             binding.textMain.text = data[position].title
 
+
+            itemView.setOnClickListener {
+                onItemClick?.invoke(data[position].ID)
+
+            }
+
+
+
+
             /*Glide
                 .with(context)
                 .load(data[position].image)
                 .into(binding.ivMain)
 */
-
-
 
 
         }
@@ -56,6 +58,8 @@ class TextAdapter(private val context: Context , private val data: List<Art>) :
 
     override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
         holder.bindData(position)
+
+
 
     }
 

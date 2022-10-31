@@ -4,31 +4,34 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.addTextChangedListener
-import androidx.viewpager.widget.PagerTabStrip
 import com.example.dictionary.R.*
 import com.example.dictionary.adapter.ViewPagerAdapter
 import com.example.dictionary.databinding.ActivityMainBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_suggestion_dialog.*
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val REC = 102
     var textChanged: ((text: String) -> Unit)? = null
+    private val TIME_DELAY = 2000
+    private var back_pressed: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnVoiceSearch.setOnClickListener {
             speechInput()
         }
+
+        btnSearch()
 
 
         //binding.vpMain.orientation = ViewPager2.ORIENTATION_VERTICAL
@@ -82,6 +87,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, "Double click to exit!",
+                Toast.LENGTH_SHORT).show()
+        }
+        back_pressed = System.currentTimeMillis()
+    }
+
     private fun initMenu() {
         val actionBarDrawerToggle = ActionBarDrawerToggle(
             this,
@@ -95,15 +111,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.navigationViewMain.setNavigationItemSelectedListener {
             when (it.itemId) {
-                com.example.dictionary.R.id.home -> {
+                id.home -> {
                     Toast.makeText(this, "You clicked on Home!", Toast.LENGTH_SHORT).show()
 
                 }
-                com.example.dictionary.R.id.translate -> {
+                id.translate -> {
                     Toast.makeText(this, "You clicked on translate!", Toast.LENGTH_SHORT).show()
 
                 }
-                com.example.dictionary.R.id.share -> {
+                id.share -> {
                     Toast.makeText(this, "You clicked on share!", Toast.LENGTH_SHORT).show()
 
                 }
@@ -120,8 +136,13 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.position == 1) {
 
-                    showKeyboard(binding.edTextMain, this@MainActivity)
+                    showKeyboard(this@MainActivity)
                     collapseToolbar()
+
+                } else if (tab.position == 0) {
+
+                    hideKeyboard(this@MainActivity)
+
 
                 }
 
@@ -167,12 +188,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showKeyboard(editText: EditText, context: Context) {
+    private fun showKeyboard(context: Context) {
         binding.edTextMain.requestFocus()
         val i: InputMethodManager =
             context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         i.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
 
+
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val i = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        var view: View? = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        i.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun btnSearch() {
+        binding.edTextMain.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+    }
+
+    private fun performSearch() {
+        val tabLayout = binding.tabLayoutMain
+        val tab = tabLayout.getTabAt(1)
+        tab!!.select()
 
     }
 

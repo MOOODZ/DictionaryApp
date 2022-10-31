@@ -1,6 +1,7 @@
 package com.example.dictionary.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
-import com.example.dictionary.adapter.TextAdapter
+import com.example.dictionary.adapter.ArtListAdapter
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.databinding.FragmentEducationBinding
 import com.example.dictionary.viewmodel.MainViewModel
@@ -17,10 +18,10 @@ import java.util.ArrayList
 
 
 class EducationFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var rvArticle: RecyclerView
     private lateinit var binding: FragmentEducationBinding
     private lateinit var textList: List<Art>
-    private lateinit var adapter: TextAdapter
+    private lateinit var artListAdapter: ArtListAdapter
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
 
@@ -38,7 +39,6 @@ class EducationFragment : Fragment() {
 
         binding = FragmentEducationBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setupViewModel()
 
@@ -49,22 +49,30 @@ class EducationFragment : Fragment() {
 
     private fun setupViewModel() {
 
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.wordsListObserve().observe({ lifecycle }, { model ->
             items.addAll(model.list_art)
-            adapter = TextAdapter(requireContext(), items)
-            recyclerView = requireView().findViewById(R.id.recyclerMain)
-            recyclerView.setHasFixedSize(true)
-            recyclerView.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            artListAdapter = ArtListAdapter(items)
+            rvArticle = requireView().findViewById(R.id.recyclerMain)
+            rvArticle.setHasFixedSize(true)
+            rvArticle.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             textList = model.list_art
-            adapter = TextAdapter(requireContext(), textList)
-            recyclerView.adapter = adapter
-            //adapter.notifyDataSetChanged()
+            artListAdapter = ArtListAdapter(textList)
+            rvArticle.adapter = artListAdapter
+            artListAdapter.onItemClick={
+                Log.i("CHECK_TEST" , it)
+
+
+            }
+            artListAdapter.notifyDataSetChanged()
         })
         viewModel.getWordsList()
 
     }
-/*
+
+
+    /*
     private fun initDialog(){
         suggestDialog.apply {
             setup(
