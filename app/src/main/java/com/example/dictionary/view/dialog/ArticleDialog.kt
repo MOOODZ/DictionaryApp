@@ -6,27 +6,32 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import com.example.dictionary.R
-import kotlinx.android.synthetic.main.activity_suggestion_dialog.*
+import com.example.dictionary.databinding.ActivityArticleDialogBinding
 import java.io.File
 
-class SuggestDialog(context: Context) : Dialog(context){
-
-    private val edt_title by lazy { findViewById<EditText>(R.id.edt_titleDialogSuggest) }
-    private val edt_desc by lazy { findViewById<EditText>(R.id.edt_descDialogSuggest) }
-    private val edt_phone by lazy { findViewById<EditText>(R.id.edt_phoneDialogSuggest) }
+class ArticleDialog(context: Context) : Dialog(context) {
+    private lateinit var binding: ActivityArticleDialogBinding
+    private val ivMain by lazy { findViewById<ImageView>(R.id.ivDialog) }
+    private val tvTitle by lazy { findViewById<TextView>(R.id.tvTitle) }
+    private val tvArticle by lazy { findViewById<TextView>(R.id.tvArticle) }
 
 
     private lateinit var file: File
+
     init {
-        setContentView(R.layout.activity_suggestion_dialog)
+        setContentView(R.layout.activity_article_dialog)
     }
 
-    var doneInterceptor: ((title: String, desc: String, phone: String, isVoice: Boolean) -> Unit)? = null
+    var doneInterceptor: ((title: String, desc: String) -> Unit)? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityArticleDialogBinding.inflate(layoutInflater)
 
         if (Build.VERSION.SDK_INT > 30)
             window?.setDecorFitsSystemWindows(false)
@@ -34,29 +39,30 @@ class SuggestDialog(context: Context) : Dialog(context){
             window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setCancelable(true)
-        setCanceledOnTouchOutside(false)
+        setCanceledOnTouchOutside(true)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dismissDialog()
+        tvArticle.setOnClickListener {
+
+            doneInterceptor!!.invoke("sdsadsa" , "sdsadsa" )
+
+        }
     }
 
 
     fun setup(
-        pageTitle: CharSequence,
-        btnTxt: CharSequence,
-        inputTypeInt: Int,
-        hintTitle: CharSequence? = null,
-        hintDesc: CharSequence? = null,
-        hintphone: CharSequence? = null,
-        maxLenthPhone: Int
+        imageView: ImageView,
+        title : CharSequence,
+        article: CharSequence,
     ) {
-        txt_titleDialogSugest.text = pageTitle
-        btn_sendDialogSuggest.text = btnTxt
+        binding.tvTitle.text = title
+        binding.tvArticle.text = article
+        //binding.ivDialog.setImageURI(s)
 
-        edt_phoneDialogSuggest.inputType = inputTypeInt
 
 
-        hintTitle?.let {
+       /* hintTitle?.let {
             lay_titleDialogSuggest.hint = it
         }
         hintDesc?.let {
@@ -67,13 +73,13 @@ class SuggestDialog(context: Context) : Dialog(context){
         }
         maxLenthPhone.let {
             lay_phoneDialogSuggest.counterMaxLength = it
-        }
+        }*/
 
     }
 
 
     private fun dismissDialog() {
-        imgClose.setOnClickListener {
+        binding.btnCloseDialog.setOnClickListener {
             dismiss()
         }
     }

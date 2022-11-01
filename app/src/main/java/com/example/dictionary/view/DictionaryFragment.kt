@@ -75,7 +75,7 @@ class DictionaryFragment : Fragment() {
 
             )
 
-        recyclerView = view.findViewById(R.id.recyclerEmpty)
+        recyclerView = view.findViewById(R.id.rvMonths)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         adapter = MonthsAdapter(monthsList.clone() as ArrayList<Months>)
         recyclerView.adapter = adapter

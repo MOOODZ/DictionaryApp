@@ -23,7 +23,6 @@ import com.example.dictionary.databinding.ActivityMainBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_suggestion_dialog.*
 
 
 class MainActivity : AppCompatActivity() {

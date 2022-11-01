@@ -10,20 +10,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
-import com.example.dictionary.adapter.ArtListAdapter
+import com.example.dictionary.adapter.ArticleAdapter
 import com.example.dictionary.apiManager.networkModel.Art
+import com.example.dictionary.apiManager.networkModel.Article
 import com.example.dictionary.databinding.FragmentEducationBinding
 import com.example.dictionary.viewmodel.MainViewModel
+import org.legobyte.khanedan.ui.dialogs.ArticleDialog
 import java.util.ArrayList
 
 
 class EducationFragment : Fragment() {
     private lateinit var rvArticle: RecyclerView
     private lateinit var binding: FragmentEducationBinding
-    private lateinit var textList: List<Art>
-    private lateinit var artListAdapter: ArtListAdapter
+    private lateinit var artList: List<Art>
+    private lateinit var artListAdapter: ArticleAdapter
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
+    private var article = ArrayList<Article>()
+    private lateinit var articleDialog: ArticleDialog
 
     //    private val suggestDialog = SuggestDialog(requireView().context)
     override fun onCreateView(
@@ -36,13 +40,13 @@ class EducationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        articleDialog = ArticleDialog(requireContext())
 
         binding = FragmentEducationBinding.inflate(layoutInflater)
 
 
         setupViewModel()
 
-//        initDialog()
 
 
     }
@@ -52,16 +56,16 @@ class EducationFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.wordsListObserve().observe({ lifecycle }, { model ->
             items.addAll(model.list_art)
-            artListAdapter = ArtListAdapter(items)
-            rvArticle = requireView().findViewById(R.id.recyclerMain)
+            artListAdapter = ArticleAdapter(items)
+            rvArticle = requireView().findViewById(R.id.rvArticle)
             rvArticle.setHasFixedSize(true)
             rvArticle.layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            textList = model.list_art
-            artListAdapter = ArtListAdapter(textList)
+                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            artList = model.list_art
+            artListAdapter = ArticleAdapter(artList)
             rvArticle.adapter = artListAdapter
-            artListAdapter.onItemClick={
-                Log.i("CHECK_TEST" , it)
+            artListAdapter.onItemClick = {
+                initDialog()
 
 
             }
@@ -69,21 +73,21 @@ class EducationFragment : Fragment() {
         })
         viewModel.getWordsList()
 
+
     }
 
 
-    /*
     private fun initDialog(){
-        suggestDialog.apply {
-            setup(
-                getString(R.string.title_dialog),
-                getString(R.string.btn_send_dialog),
-                InputType.TYPE_CLASS_NUMBER,
-                getString(R.string.title_dialog),
-                getString(R.string.edt_desc_dialog),
-                getString(R.string.edt_phone_dialog),
-                11,
-            )
+       articleDialog.apply {
+
+        doneInterceptor = {title , des ->
+
+        }
+
+       } .show()
+
+
+
 
 
 
@@ -91,7 +95,6 @@ class EducationFragment : Fragment() {
 
 
     }
-*/
 
 
     /* Using only Retrofit
@@ -126,4 +129,4 @@ class EducationFragment : Fragment() {
     }*/
 
 
-}
+

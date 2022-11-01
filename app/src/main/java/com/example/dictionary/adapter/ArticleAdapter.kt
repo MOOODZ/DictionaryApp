@@ -4,23 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.apiManager.networkModel.Art
-import com.example.dictionary.databinding.ItemListBinding
+import com.example.dictionary.databinding.ArticleListBinding
 
 
-class ArtListAdapter(private val data: List<Art>) :
-    RecyclerView.Adapter<ArtListAdapter.TextViewHolder>() {
-    private lateinit var binding: ItemListBinding
+class ArticleAdapter(private val data: List<Art>) :
+    RecyclerView.Adapter<ArticleAdapter.TextViewHolder>() {
+    private lateinit var binding: ArticleListBinding
 
     var onItemClick : ((String) -> Unit)? = null
 
 
-    inner class TextViewHolder(binding: ItemListBinding) :
+    inner class TextViewHolder(binding: ArticleListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
         fun bindData(position: Int) {
-            binding.titleMain.text = data[position].ID
-            binding.textMain.text = data[position].title
+            binding.tvTitle.text = data[position].ID
+            binding.tvArticle.text = data[position].title
 
 
             itemView.setOnClickListener {
@@ -51,7 +51,7 @@ class ArtListAdapter(private val data: List<Art>) :
 //    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder {
-        binding = ItemListBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ArticleListBinding.inflate(LayoutInflater.from(parent.context))
         return TextViewHolder(binding)
 
     }
