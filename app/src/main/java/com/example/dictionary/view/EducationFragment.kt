@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.example.dictionary.R
 import com.example.dictionary.adapter.ArticleAdapter
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.apiManager.networkModel.Article
+import com.example.dictionary.apiManager.networkModel.DetaileArticle
 import com.example.dictionary.databinding.FragmentEducationBinding
 import com.example.dictionary.viewmodel.MainViewModel
 import org.legobyte.khanedan.ui.dialogs.ArticleDialog
@@ -27,7 +29,9 @@ class EducationFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
     private var article = ArrayList<Article>()
+    private lateinit var articleList: List<Article>
     private lateinit var articleDialog: ArticleDialog
+    private lateinit var itemId: String
 
     //    private val suggestDialog = SuggestDialog(requireView().context)
     override fun onCreateView(
@@ -45,43 +49,61 @@ class EducationFragment : Fragment() {
         binding = FragmentEducationBinding.inflate(layoutInflater)
 
 
-        setupViewModel()
+        getListVM()
 
 
     }
 
-    private fun setupViewModel() {
+    private fun getListVM() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.wordsListObserve().observe({ lifecycle }, { model ->
             items.addAll(model.list_art)
-            artListAdapter = ArticleAdapter(items)
+            artListAdapter = ArticleAdapter(requireContext(), items)
             rvArticle = requireView().findViewById(R.id.rvArticle)
             rvArticle.setHasFixedSize(true)
             rvArticle.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             artList = model.list_art
-            artListAdapter = ArticleAdapter(artList)
+            artListAdapter = ArticleAdapter(requireContext(), artList)
             rvArticle.adapter = artListAdapter
-            artListAdapter.onItemClick = {
-                initDialog()
 
 
+            artListAdapter.onItemClick = { id ->
+                getDetailArticleVM(id)
             }
             artListAdapter.notifyDataSetChanged()
         })
         viewModel.getWordsList()
+    }
 
+    private fun getDetailArticleVM(id: String) {
+
+        viewModel.articlesListObserve().observe({ lifecycle }, { art ->
+
+            Log.i("CHECK_API", "desc ${art.detaile_article.dese.isEmpty()}")
+            if (art.detaile_article.dese.isEmpty()) {
+                Toast.makeText(context, "Error data", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.i("CHECK_API", art.detaile_article.toString())
+                initDialog(art.detaile_article.ID,
+                    art.detaile_article.title,
+                    art.detaile_article.dese)
+            }
+
+
+        })
+        viewModel.getArticlesList(id)
 
     }
 
 
-    private fun initDialog() {
+    private fun initDialog(id: String, title: String, desc: String) {
         articleDialog.apply {
 
-            doneInterceptor = { title, des ->
 
-            }
+            setup(id = id, title = title, desc = desc)
+
 
         }.show()
 

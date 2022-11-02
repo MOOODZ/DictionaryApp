@@ -7,21 +7,23 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.dictionary.R
+import androidx.fragment.app.DialogFragment.STYLE_NO_TITLE
 import com.example.dictionary.databinding.ActivityArticleDialogBinding
+import kotlinx.android.synthetic.main.activity_article_dialog.*
 import java.io.File
+
 
 class ArticleDialog(context: Context) : Dialog(context) {
     private lateinit var binding: ActivityArticleDialogBinding
-    private val ivMain by lazy { findViewById<ImageView>(R.id.ivDialog) }
-    private val tvTitle by lazy { findViewById<TextView>(R.id.tvTitleDialog) }
-    private val tvArticle by lazy { findViewById<TextView>(R.id.tvArticleDialog) }
+    private val ivMain by lazy { findViewById<ImageView>(com.example.dictionary.R.id.ivDialog) }
+    private val tvTitle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvTitleDialog) }
+    private val tvArticle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvArticleDialog) }
 
 
     private lateinit var file: File
 
     init {
-        setContentView(R.layout.activity_article_dialog)
+        setContentView(com.example.dictionary.R.layout.activity_article_dialog)
     }
 
     var doneInterceptor: ((title: String, desc: String) -> Unit)? = null
@@ -30,15 +32,20 @@ class ArticleDialog(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityArticleDialogBinding.inflate(layoutInflater)
 
-        if (Build.VERSION.SDK_INT > 30)
-            window?.setDecorFitsSystemWindows(false)
-        else
-            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
-        setCancelable(true)
-        setCanceledOnTouchOutside(true)
+
+
+
+
+//        if (Build.VERSION.SDK_INT > 30)
+//            window?.setDecorFitsSystemWindows(false)
+//        else
+//            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+//        requestWindowFeature(STYLE_NO_TITLE)
+//        setCancelable(true)
+//        setCanceledOnTouchOutside(false)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dismissDialog()
@@ -51,12 +58,12 @@ class ArticleDialog(context: Context) : Dialog(context) {
 
 
     fun setup(
-        imageView: ImageView,
-        title : CharSequence,
-        article: CharSequence,
+        id: String,
+        title: String,
+        desc: String
     ) {
-        binding.tvTitleDialog.text = title
-        binding.tvArticleDialog.text = article
+        tvTitleDialog.text = title
+        tvArticleDialog.text = desc
         //binding.ivDialog.setImageURI(s)
 
 
@@ -78,7 +85,7 @@ class ArticleDialog(context: Context) : Dialog(context) {
 
 
     private fun dismissDialog() {
-        binding.btnCloseDialog.setOnClickListener {
+      btn_closeDialog.setOnClickListener {
             dismiss()
         }
     }

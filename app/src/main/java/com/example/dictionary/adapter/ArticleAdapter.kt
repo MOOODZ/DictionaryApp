@@ -1,13 +1,15 @@
 package com.example.dictionary.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.databinding.ArticleListBinding
 
 
-class ArticleAdapter(private val data: List<Art>) :
+class ArticleAdapter(context: Context, private val data: List<Art>) :
     RecyclerView.Adapter<ArticleAdapter.TextViewHolder>() {
     private lateinit var binding: ArticleListBinding
 
@@ -21,6 +23,10 @@ class ArticleAdapter(private val data: List<Art>) :
         fun bindData(position: Int) {
             binding.tvTitle.text = data[position].ID
             binding.tvArticle.text = data[position].title
+            Glide
+                .with(itemView.context)
+                .load(data[position].image)
+                .into(binding.ivMain)
 
 
             itemView.setOnClickListener {
@@ -31,11 +37,7 @@ class ArticleAdapter(private val data: List<Art>) :
 
 
 
-            /*Glide
-                .with(context)
-                .load(data[position].image)
-                .into(binding.ivMain)
-*/
+
 
 
         }

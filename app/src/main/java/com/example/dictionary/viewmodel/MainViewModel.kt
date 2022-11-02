@@ -17,17 +17,14 @@ class MainViewModel : ViewModel() {
     private var getArticles: MutableLiveData<Article> = MutableLiveData<Article>()
 
     fun wordsListObserve(): MutableLiveData<Words> {
-
         getWords = MutableLiveData<Words>()
         return getWords
-
     }
 
-    fun articlesListObserve(): MutableLiveData<Article> {
 
+    fun articlesListObserve(): MutableLiveData<Article> {
         getArticles = MutableLiveData<Article>()
         return getArticles
-
     }
 
     fun getWordsList() {
@@ -38,33 +35,24 @@ class MainViewModel : ViewModel() {
                 val response = retrofitInstance.getWords()
                 getWords.postValue(response)
             } catch (ex: Exception) {
-
                 Log.v("Errors", ex.message.toString() + "")
-
-
             }
-
-
         }
-
-
     }
 
-    fun getArticlesList() {
+
+    fun getArticlesList(id:String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val retrofitInstance =
                     RetrofitInstance.getRetrofitInstance().create(ApiService::class.java)
-                val response = retrofitInstance.getArticle()
+                val response = retrofitInstance.getArticle(id)
                 getArticles.postValue(response)
 
             } catch (ex: Exception) {
 
                 Log.v("Errors", ex.message.toString() + "")
-
-
             }
-
         }
 
 
