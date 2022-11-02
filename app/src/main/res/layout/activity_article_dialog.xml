@@ -47,7 +47,7 @@
 
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvTitleDialog"
             style="@style/FontStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/ivDialog" />
 
         <TextView
-            android:id="@+id/tvArticle"
+            android:id="@+id/tvArticleDialog"
             style="@style/FontStyle"
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDialog" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

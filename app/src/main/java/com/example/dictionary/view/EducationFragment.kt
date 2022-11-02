@@ -48,7 +48,6 @@ class EducationFragment : Fragment() {
         setupViewModel()
 
 
-
     }
 
     private fun setupViewModel() {
@@ -77,56 +76,52 @@ class EducationFragment : Fragment() {
     }
 
 
-    private fun initDialog(){
-       articleDialog.apply {
+    private fun initDialog() {
+        articleDialog.apply {
 
-        doneInterceptor = {title , des ->
+            doneInterceptor = { title, des ->
 
-        }
+            }
 
-       } .show()
-
-
-
-
-
-
-        }
+        }.show()
 
 
     }
 
 
-    /* Using only Retrofit
-    private fun getData() {
+}
 
-        val retrofitData = getRetrofitInstance().create(ApiService::class.java)
-            .getWords()
 
-        retrofitData.enqueue(object : Callback<Words> {
+/* Using only Retrofit
+private fun getData() {
 
-            override fun onResponse(call: Call<Words>, response: Response<Words>) {
-                if (response.body()!!.list_art.isEmpty()) {
+    val retrofitData = getRetrofitInstance().create(ApiService::class.java)
+        .getWords()
 
-                    recyclerView.visibility = View.GONE
-                } else {
-                    textList = response.body()!!.list_art
-                    recyclerView = view!!.findViewById(R.id.recyclerMain)
-                    recyclerView.setHasFixedSize(true)
-                    recyclerView.layoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    adapter = TextAdapter(textList)
-                    recyclerView.adapter = adapter
+    retrofitData.enqueue(object : Callback<Words> {
 
-                }
+        override fun onResponse(call: Call<Words>, response: Response<Words>) {
+            if (response.body()!!.list_art.isEmpty()) {
+
+                recyclerView.visibility = View.GONE
+            } else {
+                textList = response.body()!!.list_art
+                recyclerView = view!!.findViewById(R.id.recyclerMain)
+                recyclerView.setHasFixedSize(true)
+                recyclerView.layoutManager =
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                adapter = TextAdapter(textList)
+                recyclerView.adapter = adapter
+
             }
+        }
 
-            override fun onFailure(call: Call<Words>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
+        override fun onFailure(call: Call<Words>, t: Throwable) {
+            TODO("Not yet implemented")
+        }
 
-        })
-    }*/
+    })
+}*/
 
 
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.dictionary.R
@@ -15,8 +14,8 @@ import java.io.File
 class ArticleDialog(context: Context) : Dialog(context) {
     private lateinit var binding: ActivityArticleDialogBinding
     private val ivMain by lazy { findViewById<ImageView>(R.id.ivDialog) }
-    private val tvTitle by lazy { findViewById<TextView>(R.id.tvTitle) }
-    private val tvArticle by lazy { findViewById<TextView>(R.id.tvArticle) }
+    private val tvTitle by lazy { findViewById<TextView>(R.id.tvTitleDialog) }
+    private val tvArticle by lazy { findViewById<TextView>(R.id.tvArticleDialog) }
 
 
     private lateinit var file: File
@@ -56,8 +55,8 @@ class ArticleDialog(context: Context) : Dialog(context) {
         title : CharSequence,
         article: CharSequence,
     ) {
-        binding.tvTitle.text = title
-        binding.tvArticle.text = article
+        binding.tvTitleDialog.text = title
+        binding.tvArticleDialog.text = article
         //binding.ivDialog.setImageURI(s)
 
 
