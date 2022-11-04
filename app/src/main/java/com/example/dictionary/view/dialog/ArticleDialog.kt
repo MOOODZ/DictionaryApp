@@ -14,10 +14,10 @@ import java.io.File
 
 
 class ArticleDialog(context: Context) : Dialog(context) {
-    private lateinit var binding: ActivityArticleDialogBinding
-    private val ivMain by lazy { findViewById<ImageView>(com.example.dictionary.R.id.ivDialog) }
-    private val tvTitle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvTitleDialog) }
-    private val tvArticle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvArticleDialog) }
+    //private lateinit var binding: ActivityArticleDialogBinding
+//    private val ivMain by lazy { findViewById<ImageView>(com.example.dictionary.R.id.ivDialog) }
+//    private val tvTitle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvTitleDialog) }
+//    private val tvArticle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvArticleDialog) }
 
 
     private lateinit var file: File
@@ -26,7 +26,7 @@ class ArticleDialog(context: Context) : Dialog(context) {
         setContentView(com.example.dictionary.R.layout.activity_article_dialog)
     }
 
-    var doneInterceptor: ((title: String, desc: String) -> Unit)? = null
+    //var doneInterceptor: ((title: String, desc: String) -> Unit)? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +49,11 @@ class ArticleDialog(context: Context) : Dialog(context) {
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dismissDialog()
-        tvArticle.setOnClickListener {
+        /*tvArticle.setOnClickListener {
 
             doneInterceptor!!.invoke("sdsadsa" , "sdsadsa" )
 
-        }
+        }*/
     }
 
 
