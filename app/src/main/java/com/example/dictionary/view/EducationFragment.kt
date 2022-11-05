@@ -84,7 +84,7 @@ class EducationFragment : Fragment() {
             } else {
                 Log.i("CHECK_API", art.detaile_article.toString())
                 initDialog(
-                    art.detaile_article.ID,
+                    art.detaile_article.image,
                     art.detaile_article.title,
                     art.detaile_article.dese
                 )
@@ -101,7 +101,7 @@ class EducationFragment : Fragment() {
         articleDialog.apply {
 
 
-            setup(id = id, title = title, desc = desc)
+            setup(image = id, title = title, desc = desc)
 
 
         }.show()

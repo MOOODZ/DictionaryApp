@@ -1,10 +1,16 @@
 package com.example.dictionary.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.dictionary.R
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.databinding.ArticleListBinding
 
@@ -20,13 +26,15 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
         RecyclerView.ViewHolder(binding.root) {
 
 
+
         fun bindData(position: Int) {
+
+
             binding.tvTitle.text = data[position].ID
             binding.tvArticle.text = data[position].title
-            Glide
-                .with(itemView.context)
-                .load(data[position].image)
-                .into(binding.ivMain)
+
+
+
 
 
             itemView.setOnClickListener {
@@ -60,6 +68,10 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
 
     override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
         holder.bindData(position)
+        Glide
+            .with(holder.itemView.context)
+            .load(data[position].image)
+            .into(binding.ivMain)
 
 
 
@@ -68,5 +80,9 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
     override fun getItemCount(): Int {
         return data.size
     }
+
+
+
+
 
 }

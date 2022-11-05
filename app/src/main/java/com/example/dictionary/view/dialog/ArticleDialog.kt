@@ -2,13 +2,8 @@ package org.legobyte.khanedan.ui.dialogs
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.fragment.app.DialogFragment.STYLE_NO_TITLE
-import com.example.dictionary.databinding.ActivityArticleDialogBinding
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_article_dialog.*
 import java.io.File
 
@@ -18,6 +13,7 @@ class ArticleDialog(context: Context) : Dialog(context) {
 //    private val ivMain by lazy { findViewById<ImageView>(com.example.dictionary.R.id.ivDialog) }
 //    private val tvTitle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvTitleDialog) }
 //    private val tvArticle by lazy { findViewById<TextView>(com.example.dictionary.R.id.tvArticleDialog) }
+//    private val btnCancel by lazy { findViewById() }
 
 
     private lateinit var file: File
@@ -58,13 +54,16 @@ class ArticleDialog(context: Context) : Dialog(context) {
 
 
     fun setup(
-        id: String,
+        image: String,
         title: String,
         desc: String
     ) {
         tvTitleDialog.text = title
         tvArticleDialog.text = desc
-        //binding.ivDialog.setImageURI(s)
+        Glide
+            .with(context)
+            .load(image)
+            .into(ivDialog)
 
 
 

@@ -8,6 +8,7 @@
     android:focusable="true"
     app:cardCornerRadius="4dp"
     android:layout_gravity="center"
+    android:paddingBottom="16dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,9 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/germany_pic_two"
-            app:layout_constraintDimensionRatio="3:2" />
+            android:scaleType="fitXY" />
 
 
         <TextView

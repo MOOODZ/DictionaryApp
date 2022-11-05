@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-const val BASE_URL = "https://yerbyer.com/dictionary.yerbyer.com/backend/api/v1/dic/"
+const val BASE_URL = "http://dictionary.yerbyer.com/backend/api/v1/dic/"
 
 
 class RetrofitInstance {
