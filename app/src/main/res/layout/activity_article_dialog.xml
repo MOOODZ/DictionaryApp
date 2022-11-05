@@ -21,13 +21,14 @@
         tools:layout_editor_absoluteX="0dp">
 
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_closeDialog"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="5dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_close"
+            android:backgroundTint="@android:color/transparent"
+            android:backgroundTintMode="multiply"
+            android:drawableStart="@drawable/ic_close"
             android:drawablePadding="5dp"
             app:circularflow_radiusInDP="50dp"
             app:layout_constraintBottom_toTopOf="@id/ivDialog"

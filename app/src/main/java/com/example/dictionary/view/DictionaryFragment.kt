@@ -12,14 +12,15 @@ import com.example.dictionary.adapter.MonthsAdapter
 import com.example.dictionary.databinding.ActivityMainBinding
 import com.example.dictionary.apiManager.model.Months
 import com.example.dictionary.databinding.FragmentDictionaryBinding
+import java.lang.reflect.Array.get
 
 
 class DictionaryFragment : Fragment() {
     private lateinit var monthsList: ArrayList<Months>
     private lateinit var binding: FragmentDictionaryBinding
     private lateinit var _binding: ActivityMainBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MonthsAdapter
+    private lateinit var rvMonths: RecyclerView
+    private lateinit var monthsAdapter: MonthsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,15 +76,55 @@ class DictionaryFragment : Fragment() {
 
             )
 
-        recyclerView = view.findViewById(R.id.rvMonths)
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        adapter = MonthsAdapter(monthsList.clone() as ArrayList<Months>)
-        recyclerView.adapter = adapter
+        rvMonths = view.findViewById(R.id.rvMonths)
+        rvMonths.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        monthsAdapter = MonthsAdapter(monthsList.clone() as ArrayList<Months>)
+        rvMonths.adapter = monthsAdapter
+        monthsAdapter.notifyDataSetChanged()
+
+        monthsAdapter.onDeleteClick = { removedItem ->
+            monthsList.remove(monthsList[removedItem])
+            monthsAdapter.notifyItemRemoved(removedItem)
+
+        }
 
         (activity as MainActivity).textChanged = { text ->
             addText(text)
 
         }
+
+//        adapterList.itemClickListener = { _, position ->
+//            val dialog=AlertDialog.Builder(context)
+//            dialog.setTitle("delete item")
+//            dialog.setMessage("do you want delete this item")
+//
+//            //delete item from recyclerview
+//            dialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+//                items.remove(items.get(position))
+//                adapterList.notifyItemRemoved(position)
+//            }
+//
+//            //add item in recyclerview
+//            dialog.setNegativeButton(android.R.string.no) { dialog, which ->
+////                               items.add(0,num1)
+//                adapterList.notifyItemInserted(0)
+//            }
+//            //update item in recyclerview
+//            dialog.setNeutralButton("maybe"){ dialog, which ->
+////                               items.set(position,num1/*new item*/)
+////                               adapterList.notifyItemInserted(position)
+//
+//                val cloneList = items.clone() as ArrayList<LetterItem>
+//                val filteredList = cloneList.filter { foodItem ->
+//                    foodItem.title.contains( "de" )
+//                }
+//                adapterList.setUpdateData( ArrayList( filteredList ))
+//
+//            }
+//            dialog.show()
+//        }
+
+
 
     }
 
@@ -94,11 +135,11 @@ class DictionaryFragment : Fragment() {
             val filterList = cloneList.filter { textItem ->
                 textItem.name.contains(text)
             }
-            adapter.setData(ArrayList(filterList))
+            monthsAdapter.setData(ArrayList(filterList))
 
 
         } else {
-            adapter.setData(monthsList.clone() as ArrayList<Months>)
+            monthsAdapter.setData(monthsList.clone() as ArrayList<Months>)
 
 
         }

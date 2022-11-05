@@ -79,6 +79,7 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
 
     override fun getItemCount(): Int {
         return data.size
+
     }
 
 
