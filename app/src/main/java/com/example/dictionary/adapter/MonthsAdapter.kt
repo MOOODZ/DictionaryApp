@@ -1,16 +1,15 @@
 package com.example.dictionary.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
 import com.example.dictionary.apiManager.model.Months
+import com.example.dictionary.view.DictionaryFragment
 import kotlinx.android.synthetic.main.example_item_list.view.*
 
 class MonthsAdapter(private val data: ArrayList<Months>) :
@@ -23,7 +22,8 @@ class MonthsAdapter(private val data: ArrayList<Months>) :
 
         private val monthsName = itemView.findViewById<TextView>(R.id.nameMain)
 
-        var onBtnDeleteClick = itemView.findViewById<ImageButton>(R.id.btnDelete)
+         var onBtnDeleteClick = itemView.findViewById<ImageButton>(R.id.btnDelete)
+
 
         fun bindData(position: Int) {
 
@@ -58,6 +58,11 @@ class MonthsAdapter(private val data: ArrayList<Months>) :
     fun setData(newList: ArrayList<Months>) {
         data.clear()
         data.addAll(newList)
+    }
+
+    fun delete(position: Int) {
+        data.remove(data[position])
+        notifyItemRemoved(position)
         notifyDataSetChanged()
     }
 

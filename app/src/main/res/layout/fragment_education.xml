@@ -11,10 +11,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvArticle"
+        android:layout_gravity="fill_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
-        android:paddingBottom="35dp"
+        android:paddingBottom="45dp"
         tools:listitem="@layout/article_list" />
 
 

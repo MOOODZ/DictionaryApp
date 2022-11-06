@@ -7,8 +7,10 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="4dp"
-    android:layout_gravity="center"
-    android:paddingBottom="16dp"
+    android:layout_gravity="center|fill_vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="8dp"
+    app:cardUseCompatPadding="true"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
