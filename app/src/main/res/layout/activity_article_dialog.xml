@@ -8,6 +8,7 @@
     android:layout_marginHorizontal="50dp"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
+    android:background="@android:color/transparent"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +20,7 @@
         android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
+
 
 
         <ImageButton
@@ -67,11 +69,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="6dp"
-            android:gravity="center"
+            android:gravity="start"
             android:hint="@string/test_text"
             android:justificationMode="inter_word"
             android:lineSpacingExtra="5dp"
-            android:padding="10dp"
+            android:padding="16dp"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"

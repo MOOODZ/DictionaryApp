@@ -14,6 +14,7 @@ import com.example.dictionary.R
 import com.example.dictionary.adapter.ArticleAdapter
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.fragment_education.*
 import org.legobyte.khanedan.ui.dialogs.ArticleDialog
 import java.util.ArrayList
 
@@ -25,8 +26,10 @@ class EducationFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
     private lateinit var articleDialog: ArticleDialog
+//    private lateinit var pbArticle: ProgressBar
+//    private lateinit var pbDialog: ProgressBar
 
-    //    private val suggestDialog = SuggestDialog(requireView().context)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -47,13 +50,17 @@ class EducationFragment : Fragment() {
 
     private fun getListVM() {
 
-
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.wordsListObserve().observe({ lifecycle }, { model ->
-            items.addAll(model.list_art)
-            artListAdapter = ArticleAdapter(requireContext(), items)
-            rvArticle = requireView().findViewById(R.id.rvArticle)
-            rvArticle.setHasFixedSize(true)
+            if (model.list_art.isEmpty()) {
+                pbArticle.visibility = View.VISIBLE
+                Toast.makeText(context ,"Error Connection!",Toast.LENGTH_SHORT).show()
+            } else {
+                pbArticle.visibility = View.GONE
+                items.addAll(model.list_art)
+                artListAdapter = ArticleAdapter(requireContext(), items)
+                rvArticle = requireView().findViewById(R.id.rvArticle)
+                rvArticle.setHasFixedSize(true)
                 Log.i("EMPTY_LIST", model.list_art.toString())
                 rvArticle.layoutManager =
                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -61,13 +68,18 @@ class EducationFragment : Fragment() {
                 artListAdapter = ArticleAdapter(requireContext(), artList)
                 rvArticle.adapter = artListAdapter
                 artListAdapter.notifyDataSetChanged()
-                artListAdapter.onItemClick = { id ->
+
+
+
+                artListAdapter.onItemClickId = { id ->
+
                     getDetailArticleVM(id)
+                }
 
 
             }
-
         })
+
 
         viewModel.getWordsList()
 
@@ -80,8 +92,10 @@ class EducationFragment : Fragment() {
 
             Log.i("CHECK_API", "desc ${art.detaile_article.dese.isEmpty()}")
             if (art.detaile_article.dese.isEmpty()) {
+                //pbDialog.visibility = View.VISIBLE
                 Toast.makeText(context, "Error data", Toast.LENGTH_SHORT).show()
             } else {
+//                pbDialog.visibility = View.GONE
                 Log.i("CHECK_API", art.detaile_article.toString())
                 initDialog(
                     art.detaile_article.image,
@@ -89,7 +103,6 @@ class EducationFragment : Fragment() {
                     art.detaile_article.dese
                 )
             }
-
 
         })
         viewModel.getArticlesList(id)
@@ -108,7 +121,6 @@ class EducationFragment : Fragment() {
 
 
     }
-
 
 }
 

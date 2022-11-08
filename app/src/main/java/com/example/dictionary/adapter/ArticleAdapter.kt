@@ -1,28 +1,24 @@
 package com.example.dictionary.adapter
 
-import android.app.Activity
+import android.content.ClipData.Item
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dictionary.R
 import com.example.dictionary.apiManager.networkModel.Art
-import com.example.dictionary.databinding.ArticleListBinding
+import com.example.dictionary.databinding.ArticleRowBinding
 
 
 class ArticleAdapter(context: Context, private val data: List<Art>) :
     RecyclerView.Adapter<ArticleAdapter.TextViewHolder>() {
-    private lateinit var binding: ArticleListBinding
+    private lateinit var binding: ArticleRowBinding
 
-    var onItemClick : ((String) -> Unit)? = null
+    var onItemClickId : ((String) -> Unit)? = null
 
 
-    inner class TextViewHolder(binding: ArticleListBinding) :
+
+    inner class TextViewHolder(binding: ArticleRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
@@ -38,7 +34,7 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
 
 
             itemView.setOnClickListener {
-                onItemClick?.invoke(data[position].ID)
+                onItemClickId?.invoke(data[position].ID)
 
             }
 
@@ -61,7 +57,7 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
 //    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder {
-        binding = ArticleListBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ArticleRowBinding.inflate(LayoutInflater.from(parent.context))
         return TextViewHolder(binding)
 
     }

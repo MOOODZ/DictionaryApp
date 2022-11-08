@@ -1,11 +1,11 @@
 package com.example.dictionary.view
 
 import android.app.AlertDialog
+import android.graphics.Color.red
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -84,12 +84,17 @@ class DictionaryFragment : Fragment() {
         monthsAdapter = MonthsAdapter(monthsList.clone() as ArrayList<Months>)
         rvMonths.adapter = monthsAdapter
 
-        monthsAdapter.onDeleteClick = {
 
-            monthsList.remove(monthsList[it])
-            monthsAdapter.notifyItemRemoved(it)
+
+
+
+
+        monthsAdapter.onDeleteClick = {
+            initAlertDialog(it)
 
         }
+
+
 
         (activity as MainActivity).textChanged = { text ->
             addText(text)
@@ -97,8 +102,8 @@ class DictionaryFragment : Fragment() {
         }
 
 
-
     }
+
 
     private fun addText(text: String) {
 
@@ -113,25 +118,28 @@ class DictionaryFragment : Fragment() {
         }
     }
 
-     fun initAlertDialog() {
+    fun initAlertDialog(position: Int) {
 
 
-        builder = AlertDialog.Builder(context)
-        builder.setTitle("Delete Item")
+        builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+        builder.setTitle("Deleting!!!")
         builder.setMessage("Are you sure?")
-        builder.setPositiveButton(android.R.string.yes) { _, _ ->
+        builder.setPositiveButton(R.string.yes) { _, _ ->
 
+            monthsAdapter.delete(position)
+        }
 
-            builder.setNegativeButton(android.R.string.no) { _, _ ->
-                monthsAdapter.notifyItemInserted(0)
-
-            }
-
-            dialog = builder.create()
-            dialog.show()
-
+        builder.setNegativeButton(R.string.no) { _, _ ->
+            monthsAdapter.notifyItemInserted(position)
+            monthsAdapter.notifyDataSetChanged()
 
         }
+
+
+
+
+        dialog = builder.create()
+        dialog.show()
 
 
     }
