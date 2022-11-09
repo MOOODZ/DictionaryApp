@@ -26,7 +26,7 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
         fun bindData(position: Int) {
 
 
-            binding.tvTitle.text = data[position].ID
+            //binding.tvTitle.text = data[position].ID
             binding.tvArticle.text = data[position].title
 
 

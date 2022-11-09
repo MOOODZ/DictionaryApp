@@ -1,7 +1,6 @@
 package com.example.dictionary.view
 
 import android.app.AlertDialog
-import android.graphics.Color.red
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.example.dictionary.adapter.MonthsAdapter
 import com.example.dictionary.apiManager.model.Months
 import com.example.dictionary.databinding.ActivityMainBinding
 import com.example.dictionary.databinding.FragmentDictionaryBinding
-import kotlinx.android.synthetic.main.example_item_list.*
 
 
 class DictionaryFragment : Fragment() {
@@ -122,7 +120,7 @@ class DictionaryFragment : Fragment() {
 
 
         builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
-        builder.setTitle("Deleting!!!")
+        builder.setTitle("Delete Item")
         builder.setMessage("Are you sure?")
         builder.setPositiveButton(R.string.yes) { _, _ ->
 
