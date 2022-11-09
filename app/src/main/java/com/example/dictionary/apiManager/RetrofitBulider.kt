@@ -15,8 +15,8 @@ class RetrofitInstance {
         fun getRetrofitInstance(): Retrofit {
 
             val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder()

@@ -1,22 +1,22 @@
 package com.example.dictionary.view
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dictionary.R
 import com.example.dictionary.adapter.ArticleAdapter
 import com.example.dictionary.apiManager.networkModel.Art
 import com.example.dictionary.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_education.*
 import org.legobyte.khanedan.ui.dialogs.ArticleDialog
-import java.util.ArrayList
 
 
 class EducationFragment : Fragment() {
@@ -26,40 +26,56 @@ class EducationFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var items = ArrayList<Art>()
     private lateinit var articleDialog: ArticleDialog
-//    private lateinit var pbArticle: ProgressBar
-//    private lateinit var pbDialog: ProgressBar
+    private lateinit var pbArticle: ProgressBar
+    private lateinit var pbDialog: ProgressBar
+    private lateinit var btnRetry: ImageButton
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_education, container, false)
+        return inflater.inflate(com.example.dictionary.R.layout.fragment_education,
+            container,
+            false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         articleDialog = ArticleDialog(requireContext())
+        pbDialog = requireView().findViewById(com.example.dictionary.R.id.pbDialog)
+        pbDialog.visibility = View.GONE
 
 
         getListVM()
 
 
+        btnRetry = view.findViewById(com.example.dictionary.R.id.btnRetry)
+        btnRetry.visibility = View.VISIBLE
+        btnRetry.setOnClickListener {
+
+            getListVM()
+        }
+
+
     }
+
 
     private fun getListVM() {
 
+        pbArticle = requireView().findViewById(com.example.dictionary.R.id.pbArticle)
+        pbArticle.visibility = View.VISIBLE
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.wordsListObserve().observe({ lifecycle }, { model ->
             if (model.list_art.isEmpty()) {
-                pbArticle.visibility = View.VISIBLE
-                Toast.makeText(context ,"Error Connection!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error Connection!", Toast.LENGTH_SHORT).show()
             } else {
+                btnRetry.visibility = View.GONE
                 pbArticle.visibility = View.GONE
                 items.addAll(model.list_art)
                 artListAdapter = ArticleAdapter(requireContext(), items)
-                rvArticle = requireView().findViewById(R.id.rvArticle)
+                rvArticle = requireView().findViewById(com.example.dictionary.R.id.rvArticle)
                 rvArticle.setHasFixedSize(true)
                 Log.i("EMPTY_LIST", model.list_art.toString())
                 rvArticle.layoutManager =
@@ -69,11 +85,10 @@ class EducationFragment : Fragment() {
                 rvArticle.adapter = artListAdapter
                 artListAdapter.notifyDataSetChanged()
 
-
-
                 artListAdapter.onItemClickId = { id ->
 
                     getDetailArticleVM(id)
+
                 }
 
 
@@ -87,22 +102,23 @@ class EducationFragment : Fragment() {
 
 
     private fun getDetailArticleVM(id: String) {
-
+        pbDialog.visibility = View.VISIBLE
         viewModel.articlesListObserve().observe({ lifecycle }, { art ->
-
             Log.i("CHECK_API", "desc ${art.detaile_article.dese.isEmpty()}")
             if (art.detaile_article.dese.isEmpty()) {
-                //pbDialog.visibility = View.VISIBLE
                 Toast.makeText(context, "Error data", Toast.LENGTH_SHORT).show()
             } else {
-//                pbDialog.visibility = View.GONE
-                Log.i("CHECK_API", art.detaile_article.toString())
-                initDialog(
-                    art.detaile_article.image,
-                    art.detaile_article.title,
-                    art.detaile_article.dese
-                )
+
+                pbDialog.visibility = View.GONE
+
             }
+            Log.i("CHECK_API", art.detaile_article.toString())
+            initDialog(
+                art.detaile_article.image,
+                art.detaile_article.title,
+                art.detaile_article.dese
+            )
+
 
         })
         viewModel.getArticlesList(id)

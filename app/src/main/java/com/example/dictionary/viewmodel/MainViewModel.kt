@@ -1,5 +1,6 @@
 package com.example.dictionary.viewmodel
 
+import android.os.HandlerThread
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,9 @@ import com.example.dictionary.apiManager.networkModel.Article
 import com.example.dictionary.apiManager.networkModel.Words
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.internal.http2.Http2Reader
+import java.util.logging.Handler
+import kotlin.concurrent.thread
 
 
 class MainViewModel : ViewModel() {
@@ -35,7 +39,7 @@ class MainViewModel : ViewModel() {
                 val response = retrofitInstance.getWords()
                 getWords.postValue(response)
             } catch (ex: Exception) {
-                Log.v("Errors", ex.message.toString() + "")
+                Log.v("ListErrors", ex.message.toString() + "")
             }
         }
     }
@@ -49,9 +53,14 @@ class MainViewModel : ViewModel() {
                 val response = retrofitInstance.getArticle(id)
                 getArticles.postValue(response)
 
-            } catch (ex: Exception) {
 
+            } catch (ex: Exception) {
+                val retrofitInstance =
+                    RetrofitInstance.getRetrofitInstance().create(ApiService::class.java)
+                val failedResponse = retrofitInstance.getArticle(id)
+                getArticles.postValue(failedResponse)
                 Log.v("Errors", ex.message.toString() + "")
+
             }
         }
 
