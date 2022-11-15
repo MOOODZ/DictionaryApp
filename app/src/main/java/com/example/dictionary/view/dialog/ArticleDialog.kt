@@ -33,22 +33,9 @@ class ArticleDialog(context: Context) : BottomSheetDialog(context) {
         dismissDialog()
 
 
-//        if (Build.VERSION.SDK_INT > 30)
-//            window?.setDecorFitsSystemWindows(false)
-//        else
-//            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-//        requestWindowFeature(STYLE_NO_TITLE)
-//        setCancelable(true)
-//        setCanceledOnTouchOutside(false)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
 
-        /*tvArticle.setOnClickListener {
-
-            doneInterceptor!!.invoke("sdsadsa" , "sdsadsa" )
-
-        }*/
     }
 
 
@@ -61,22 +48,8 @@ class ArticleDialog(context: Context) : BottomSheetDialog(context) {
         tvArticleDialog.text = desc
         Glide
             .with(context)
-            .load(image)
+            .load(image).placeholder(R.drawable.image)
             .into(ivDialog)
-
-
-        /* hintTitle?.let {
-             lay_titleDialogSuggest.hint = it
-         }
-         hintDesc?.let {
-             lay_descDialogSuggest.hint = it
-         }
-         hintphone.let {
-             lay_phoneDialogSuggest.hint = it
-         }
-         maxLenthPhone.let {
-             lay_phoneDialogSuggest.counterMaxLength = it
-         }*/
 
     }
 

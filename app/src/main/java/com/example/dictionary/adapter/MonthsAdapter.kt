@@ -24,7 +24,7 @@ class MonthsAdapter(private val data: ArrayList<Months>) :
 
         private val monthsName = itemView.findViewById<TextView>(R.id.nameMain)
 
-         var onBtnDeleteClick = itemView.findViewById<ImageButton>(R.id.btnDelete)
+         private var onBtnDeleteClick = itemView.findViewById<ImageButton>(R.id.btnDelete)
 
 
         fun bindData(position: Int) {

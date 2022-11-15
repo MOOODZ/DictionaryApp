@@ -11,4 +11,5 @@
     <color name="gold">#FFD700</color>
     <color name="gray">#EDEDED</color>
     <color name="red">#FF1732</color>
+    <color name="transparent_white">#AEFFFFFF</color>
 </resources>
