@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
 import com.example.dictionary.adapter.MonthsAdapter
-import com.example.dictionary.apiManager.model.Months
+import com.example.dictionary.apimanager.model.Months
 import com.example.dictionary.databinding.ActivityMainBinding
 import com.example.dictionary.databinding.FragmentDictionaryBinding
 
@@ -116,7 +116,7 @@ class DictionaryFragment : Fragment() {
         }
     }
 
-    fun initAlertDialog(position: Int) {
+    private fun initAlertDialog(position: Int) {
 
 
         builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)

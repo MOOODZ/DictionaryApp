@@ -1,7 +1,7 @@
-package com.example.dictionary.apiManager
+package com.example.dictionary.apimanager
 
-import com.example.dictionary.apiManager.networkModel.Article
-import com.example.dictionary.apiManager.networkModel.Words
+import com.example.dictionary.apimanager.networkModel.Article
+import com.example.dictionary.apimanager.networkModel.Words
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

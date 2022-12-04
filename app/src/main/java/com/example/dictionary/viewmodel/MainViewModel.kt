@@ -1,19 +1,15 @@
 package com.example.dictionary.viewmodel
 
-import android.os.HandlerThread
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dictionary.apiManager.ApiService
-import com.example.dictionary.apiManager.RetrofitInstance
-import com.example.dictionary.apiManager.networkModel.Article
-import com.example.dictionary.apiManager.networkModel.Words
+import com.example.dictionary.apimanager.ApiService
+import com.example.dictionary.apimanager.RetrofitInstance
+import com.example.dictionary.apimanager.networkModel.Article
+import com.example.dictionary.apimanager.networkModel.Words
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.http2.Http2Reader
-import java.util.logging.Handler
-import kotlin.concurrent.thread
 
 
 class MainViewModel : ViewModel() {
@@ -24,7 +20,6 @@ class MainViewModel : ViewModel() {
         getWords = MutableLiveData<Words>()
         return getWords
     }
-
 
     fun articlesListObserve(): MutableLiveData<Article> {
         getArticles = MutableLiveData<Article>()
@@ -45,7 +40,7 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun getArticlesList(id:String) {
+    fun getArticlesList(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val retrofitInstance =

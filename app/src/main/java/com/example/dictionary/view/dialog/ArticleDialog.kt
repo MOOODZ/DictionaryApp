@@ -24,8 +24,6 @@ class ArticleDialog(context: Context) : BottomSheetDialog(context) {
         setContentView(bottomSheetDialog)
     }
 
-    //var doneInterceptor: ((title: String, desc: String) -> Unit)? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

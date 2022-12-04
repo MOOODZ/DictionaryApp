@@ -1,4 +1,4 @@
-package com.example.dictionary.apiManager
+package com.example.dictionary.apimanager
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

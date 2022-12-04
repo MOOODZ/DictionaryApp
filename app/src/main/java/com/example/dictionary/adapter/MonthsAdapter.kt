@@ -8,9 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.R
-import com.example.dictionary.apiManager.model.Months
-import com.example.dictionary.apiManager.networkModel.Art
-import com.example.dictionary.view.DictionaryFragment
+import com.example.dictionary.apimanager.model.Months
 import kotlinx.android.synthetic.main.example_item_list.view.*
 
 class MonthsAdapter(private val data: ArrayList<Months>) :

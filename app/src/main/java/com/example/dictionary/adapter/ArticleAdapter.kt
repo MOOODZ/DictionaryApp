@@ -1,13 +1,12 @@
 package com.example.dictionary.adapter
 
-import android.content.ClipData.Item
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dictionary.R
-import com.example.dictionary.apiManager.networkModel.Art
+import com.example.dictionary.apimanager.networkModel.Art
 import com.example.dictionary.databinding.ArticleRowBinding
 
 
@@ -69,7 +68,6 @@ class ArticleAdapter(context: Context, private val data: List<Art>) :
             .with(holder.itemView.context)
             .load(data[position].image).placeholder(R.drawable.image)
             .into(binding.ivMain)
-
 
 
     }

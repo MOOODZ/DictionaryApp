@@ -1,8 +1,6 @@
 package com.example.dictionary.view
 
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.adapter.ArticleAdapter
-import com.example.dictionary.apiManager.networkModel.Art
+import com.example.dictionary.apimanager.networkModel.Art
 import com.example.dictionary.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.article_row.*
 import org.legobyte.khanedan.ui.dialogs.ArticleDialog
 
 

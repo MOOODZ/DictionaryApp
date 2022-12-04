@@ -1,4 +1,4 @@
-package com.example.dictionary.apiManager.model
+package com.example.dictionary.apimanager.model
 
 
 data class Text(
