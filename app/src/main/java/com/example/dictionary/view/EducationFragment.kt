@@ -38,6 +38,7 @@ class EducationFragment : Fragment() {
             container,
             false)
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
