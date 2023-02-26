@@ -65,6 +65,7 @@ class MonthsAdapter(private val data: ArrayList<Months>) :
     fun delete(position: Int) {
         data.remove(data[position])
         notifyItemRemoved(position)
+
         notifyDataSetChanged()
     }
 
